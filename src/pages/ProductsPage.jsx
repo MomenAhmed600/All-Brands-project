@@ -15,7 +15,7 @@ function ProductsPage() {
 
   useEffect(() => {
     if (location.pathname === "/products") {
-      // <------------woman-video-------------------->
+      // <------------product-video-------------------->
       fetch("http://localhost:8000/allproduct-video")
         .then((response) => {
           return response.json();
@@ -23,7 +23,7 @@ function ProductsPage() {
         .then((data) => {
           setListvideo(data);
         });
-      // <------------woman-cards-video-------------------->
+      // <------------cards-video-------------------->
       fetch("http://localhost:8000/all-products-cards")
         .then((response) => {
           return response.json();
@@ -41,7 +41,7 @@ function ProductsPage() {
           setListtop10(data);
         });
 
-      // <------------woman-front-photo-------------------->
+      // <------------front-photo-------------------->
       fetch("http://localhost:8000/allproduct-front-photo")
         .then((response) => {
           return response.json();
@@ -50,7 +50,7 @@ function ProductsPage() {
           setListfrontphoto(data);
         });
     } else if (gender.length > 0 && ["woman", "man", "kids"].includes(gender)) {
-      // <------------woman-video-------------------->
+      // <-------------video-------------------->
       fetch(`http://localhost:8000/${gender}-video`)
         .then((response) => {
           return response.json();
@@ -58,7 +58,7 @@ function ProductsPage() {
         .then((data) => {
           setListvideo(data);
         });
-      // <------------woman-cards-video-------------------->
+      // <------------cards-video-------------------->
       fetch(`http://localhost:8000/${gender}`)
         .then((response) => {
           return response.json();
@@ -76,7 +76,7 @@ function ProductsPage() {
           setListtop10(data);
         });
 
-      // <------------woman-front-photo-------------------->
+      // <------------front-photo-------------------->
       fetch(`http://localhost:8000/${gender}-front-photo`)
         .then((response) => {
           return response.json();
