@@ -2,13 +2,15 @@ import { useNavigate } from "react-router-dom";
 import { IoPersonCircle } from "react-icons/io5";
 import { useState } from "react";
 import { useUser } from '../context/UserContext';
+
+
 export default function LoginPage() {
   const { setUser } = useUser();
+ 
   const [data, setData] = useState({
     email: '',
     password: ''
   });
-  const [error, setError] = useState('');
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,25 +29,23 @@ export default function LoginPage() {
 
         if (user) {
           setUser(user); 
+          localStorage.setItem("user", JSON.stringify(user));
           navigate(`/profile/${user.id}`);
         } else {
-          setError('Invalid email or password. Please try again.');
+          alert('Invalid email or password. Please try again.');
         }
       })
-      .catch((error) => {
-        console.error('Error fetching users:', error);
-        setError('An error while logging in. Please try again.');
+      .catch((err) => {
+        console.log(err)
+        alert('An error while logging in. Please try again.');
       });
   };
+
 
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/create-account");
   };
-  // const navie = useNavigate();
-  // const handleLogin = () => {
-  //   navie("/profile/:userId");
-  // };
 
   return (
     <div className="login">
@@ -74,7 +74,6 @@ export default function LoginPage() {
           />
           <input type="submit" value="Login" />
         </form>
-        {error && <p className="error">{error}</p>}
         <a href="*">FORGOT PASSWORD?</a>
         <hr />
         <h4>Dont Have An Account Yet?</h4>

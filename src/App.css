@@ -104,7 +104,7 @@ body {
   background-color: white;
   border-radius: 10px;
   padding: 20px;
-  width: 450px; /* يمكنك تعديل العرض حسب الحاجة */
+  width: 450px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
 }
@@ -252,7 +252,7 @@ hr {
   margin: 2rem 0;
   color: #e0e0e0;
 }
-/* <----------------main-pago-------------> */
+/* <----------------main-page-------------> */
 
 .wrapper {
   width: 100%;
@@ -314,14 +314,8 @@ hr {
 }
 
 
-/* <---------------cards--------------------------> */
 
-.pdcard img {
-    border-radius: 30px;
-    padding: 20px;
-    height: 30rem;
-    object-fit: cover;
-}
+
 
 
 /* <----------------top ten reviews-------------> */
@@ -355,6 +349,21 @@ hr {
   margin: auto;
   text-align: center;
   font-family: arial;
+  position: relative;
+}
+
+.cart-card-review {
+  position: absolute;
+  right: 45px;
+  top: 254px;
+  border-radius: 50%;
+  width: 29px;
+  height: 25px;
+  border: none;
+}
+
+.cart-logo-review {
+  color: #0b7032;
 }
 
 .card-review:hover{
@@ -393,8 +402,39 @@ border-radius: 10px
   transition: .5s ease;
 }
 
+.cart-card {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background-color: inherit;
+  color: #0b7032;
+}
+
+.cart-logo{
+  font-size: 20px;
+}
+
 /* <----------------pearnt-product------------------------> */
 
+.pdcard img {
+  border-radius: 30px;
+  padding: 20px;
+  height: 30rem;
+  object-fit: cover;
+}
+
+.card-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 
 .pearnt-product {
   display: flex;
@@ -714,6 +754,10 @@ border-radius: 10px
 
   .card-review:hover{
     border: none;
+    }
+
+    .card-review {
+      max-width: 16rem;
     }
 }
 

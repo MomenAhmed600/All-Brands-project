@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { BiHeart } from "react-icons/bi";
+import { BsCart } from "react-icons/bs";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { useUser } from "../context/UserContext"; 
+
 
 function ProductsPage() {
   const [list, setList] = useState([]);
@@ -11,7 +14,8 @@ function ProductsPage() {
   const [listvideo, setListvideo] = useState([]);
   const { gender } = useParams();
   const location = useLocation();
-  console.log(gender);
+  const { carts, addCart, removeCart } = useCart()
+  const { user } = useUser();
 
   useEffect(() => {
     if (location.pathname === "/products") {
@@ -110,6 +114,42 @@ function ProductsPage() {
     },
   };
 
+
+  const toggleCart = (product) => {
+    if (carts.some(car => car.id === product.id)) {
+      removeCart(product.id)
+    } else {
+      addCart(product)
+    }
+};
+
+
+const handleAddCart  = (product) => {
+    if (!user) {
+        alert("Please log in to show your carts.");
+        return;
+    }
+
+    fetch('http://localhost:8000/carts', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userId: user.id,
+            productId: product.id,
+            title: product.title,
+            description: product.description,
+            image: product.image,
+        }),
+    })
+        .then(res => res.json())
+        .then(data => {
+          addCart(data);
+        })
+};
+
+ 
   const navigaterev = useNavigate();
 
   return (
@@ -154,6 +194,12 @@ function ProductsPage() {
         <Carousel responsive={responsive}>
           {listtop10.map((product) => (
             <div className="card-review" key={product.id}>
+              <button className="cart-card-review">
+                <BsCart className="cart-logo-review" onClick={() => {
+                    toggleCart(product);
+                    handleAddCart(product);
+                  }}/>
+              </button>
               <img
                 src={product.image}
                 alt={product.title}
@@ -198,7 +244,7 @@ function ProductsPage() {
                 <img
                   src={product.image}
                   className="card-img-top"
-                  alt="pic for the recipe"
+                  alt="pic clothes"
                 />
                 <div className="card-body pdcardbody">
                   <h5 className="card-title">{product.title}</h5>
@@ -210,10 +256,11 @@ function ProductsPage() {
                 <div className="mb-4 d-flex justify-content-around wsbtn">
                   <button className="btn btn-dark">View Details</button>
 
-                  <button>
-                    <BiHeart color="red" />
-
-                    <BiHeart />
+                  <button className="cart-card" onClick={() => {
+                    toggleCart(product);
+                    handleAddCart(product);
+                  }}>
+                    <BsCart className="cart-logo" />
                   </button>
                 </div>
               </div>

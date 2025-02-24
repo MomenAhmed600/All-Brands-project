@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 export default function ProfilePage() {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
-  const [comments, setComments] = useState([]);
   const [newImage, setNewImage] = useState(null);
 
   useEffect(() => {
@@ -73,8 +72,11 @@ export default function ProfilePage() {
         </div>
         <div className="col-md-5 my-5">
           <h1 className="mt-5 ">
-            Your Profile
+            Account Profile
           </h1>
+          <h3 className="mt-5 ">
+            Welcome {user.firstName}
+          </h3>
 
           <div className="profi-det my-3">
             <div className='profi-det-c'>
@@ -91,20 +93,6 @@ export default function ProfilePage() {
           <div  className="profi-det-email-c">
             <h4>Email: </h4>
           <h5>{user.email}</h5>
-          </div>
-
-
-          <div className="comment-profi">
-            <h2>Comments</h2>
-            {comments.length > 0 ? (
-              <ul>
-                {comments.map((comment) => (
-                  <li key={comment.id}>{comment.text}</li>
-                ))}
-              </ul>
-            ) : (
-              <p>No comments made yet.</p>
-            )}
           </div>
         </div>
 
