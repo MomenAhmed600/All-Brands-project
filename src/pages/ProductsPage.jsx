@@ -115,14 +115,24 @@ function ProductsPage() {
   };
 
 
-  const toggleCart = (product) => {
-    if (carts.some(car => car.id === product.id)) {
-      removeCart(product.id)
-    } else {
-      addCart(product)
-    }
-};
+//   const toggleCart = (product) => {
+//     if (carts.some(car => car.id === product.id)) {
+//       removeCart(product.id)
+//     } else {
+//       addCart(product)
+//     }
+// };
 
+// const toggleCart = (product) => {
+//   console.log("Current carts:", carts);
+//   if (carts.some(car => car.id === product.id)) {
+//     console.log("Product , removing:", product);
+//     removeCart(product.id);
+//   } else {
+//     console.log(" does not same Product, adding:", product);
+//     addCart(product);
+//   }
+// };
 
 const handleAddCart  = (product) => {
     if (!user) {
@@ -149,6 +159,36 @@ const handleAddCart  = (product) => {
         })
 };
 
+
+// const handleAddCart = (product) => {
+//   console.log("Before action, carts:", carts);
+//   if (carts.some(car => String(car.id) === String(product.id))) {
+//     removeCart(product.id);
+//   } else {
+//     if (!user) {
+//       alert("Please log in to add products to your cart.");
+//       return;
+//     }
+//     fetch('http://localhost:8000/carts', {
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//           userId: user.id,
+//           productId: product.id,
+//           title: product.title,
+//           description: product.description,
+//           image: product.image,
+//       }),
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+//       addCart(data);
+//       console.log("After add, carts:", carts);
+//     });
+//   }
+// };
  
   const navigaterev = useNavigate();
 
@@ -196,7 +236,7 @@ const handleAddCart  = (product) => {
             <div className="card-review" key={product.id}>
               <button className="cart-card-review">
                 <BsCart className="cart-logo-review" onClick={() => {
-                    toggleCart(product);
+                    // toggleCart(product);
                     handleAddCart(product);
                   }}/>
               </button>
@@ -257,7 +297,7 @@ const handleAddCart  = (product) => {
                   <button className="btn btn-dark">View Details</button>
 
                   <button className="cart-card" onClick={() => {
-                    toggleCart(product);
+                    // toggleCart(product);
                     handleAddCart(product);
                   }}>
                     <BsCart className="cart-logo" />

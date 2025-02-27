@@ -64,6 +64,17 @@ body {
   height: 4rem;
 }
 
+.cart-log{
+  font-size: larger;
+}
+
+
+.count-log {
+  font-size: 7px;
+    margin-top: 24px;
+    margin-left: -7px;
+}
+
 .logo {
   height: auto;
 }
@@ -413,6 +424,8 @@ border-radius: 10px
 .cart-logo{
   font-size: 20px;
 }
+
+
 
 /* <----------------pearnt-product------------------------> */
 

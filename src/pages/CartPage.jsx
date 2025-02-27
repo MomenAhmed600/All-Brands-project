@@ -3,16 +3,18 @@ import { FaStar } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { useUser } from "../context/UserContext";
 import { useEffect, useState } from "react";
+import { useCart } from "../context/CartContext";
 
 function CartPage() {
   const { user } = useUser();
-  const [carts, setCarts] = useState([]);
+  const { carts, removeCart } = useCart();
+  const [cartsList, setCartsList] = useState([]);
 
   useEffect(() => {
     if (user) {
       fetch(`http://localhost:8000/carts?userId=${user.id}`)
         .then((res) => res.json())
-        .then((data) => setCarts(data));
+        .then((data) => setCartsList(data));
     }
   }, [user]);
 
@@ -21,14 +23,16 @@ function CartPage() {
       method: "DELETE",
     })
       .then(() => {
-        setCarts(carts.filter((car) => car.id !== productId));
+        console.log("Product deleted from server:", productId);
+        setCartsList(cartsList.filter((car) => car.id !== productId));
+        removeCart(productId);
       })
       .catch((err) => console.log(err));
   };
   return (
     <>
       <Container>
-        {carts.map((product) => (
+        {cartsList.map((product) => (
           <div className="review-p-fevo" key={product.id}>
             <div className="row" id="bg-prof-img">
               <div className="col-md-2">
@@ -57,7 +61,7 @@ function CartPage() {
                     <a
                       id="delete-logo"
                       onClick={() => handelRemoveCart(product.id)}
-                    //   href="/cart"
+                      // href="/cart"
                     >
                       <i>
                         <MdDeleteForever />
