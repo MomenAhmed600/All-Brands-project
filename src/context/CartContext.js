@@ -13,13 +13,6 @@
             setCarts((prevCarts) => prevCarts.filter(product => product.id !== productId))
         }
 
-        // const removeCart = (productId) => {
-        //     setCarts((prevCarts) => {
-        //       const updated = prevCarts.filter(product => Number(product.id) !== Number(productId));
-        //       console.log("Updated carts after removal:", updated);
-        //       return [...updated];
-        //     });
-        // }
 
         return (
             <CartContext.Provider value={{ carts, addCart, removeCart }}>

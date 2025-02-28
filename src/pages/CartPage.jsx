@@ -52,8 +52,7 @@ function CartPage() {
                 <div className="links-favo">
                   <div>
                     <h6 className="star-logo">
-                      <FaStar />
-                      <span id="rate">4.9</span>
+                      <span id="rate">{product.price} <span>EGP</span></span>
                     </h6>
                   </div>
 
@@ -61,7 +60,7 @@ function CartPage() {
                     <a
                       id="delete-logo"
                       onClick={() => handelRemoveCart(product.id)}
-                      // href="/cart"
+                      href="#as"
                     >
                       <i>
                         <MdDeleteForever />

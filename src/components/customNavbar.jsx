@@ -26,9 +26,9 @@ useEffect(() => {
           const response = await fetch("http://localhost:8000/carts");
           const data = await response.json();
           setCartCount(data.length > 0 ? data : []); 
-          console.log("🔄 Navbar updated! Cart count:", carts.length);
+          console.log("🔄 Navbar updated:", carts.length);
       } catch (error) {
-          console.error("Error fetching cart items:", error);
+          console.error("Error fetching:", error);
       }
   };
   fetchCarts();

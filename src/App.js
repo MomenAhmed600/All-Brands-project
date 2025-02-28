@@ -20,10 +20,10 @@ function App() {
           <CartProvider>
             <CustomNavbar />
             <Routes>
-              <Route path="/" element={<MainContent />} />
+              <Route path="/create-account" element={<CreateAccount />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/profile/:userId" element={<ProfilePage />} />
-              <Route path="/create-account" element={<CreateAccount />} />
+              <Route path="/" element={<MainContent />} />
               <Route path="/carts" element={<CartPage />} />
               <Route path="/products/:gender?" element={<ProductsPage />} />
               <Route path="/momenpage" element={<MomenPage />} />
