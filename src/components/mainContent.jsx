@@ -1,4 +1,3 @@
-import MainContentReviews from "./MainContentReviews";
 import { useNavigate } from "react-router-dom";
 
 export default function MainContent() {
@@ -50,7 +49,6 @@ export default function MainContent() {
 
       </div>
 
-      {/* <MainContentReviews />  mo'men update */}
     </>
   );
 }

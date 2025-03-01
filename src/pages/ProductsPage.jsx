@@ -123,16 +123,16 @@ function ProductsPage() {
 //     }
 // };
 
-const toggleCart = (product) => {
-  console.log("Current carts:", carts);
-  if (carts.some(car => car.id === product.id)) {
-    console.log("Product , removing:", product);
-    removeCart(product.id);
-  } else {
-    console.log(" does not same Product, adding:", product);
-    addCart(product);
-  }
-};
+// const toggleCart = (product) => {
+//   console.log("Current carts:", carts);
+//   if (carts.some(car => car.id === product.id)) {
+//     console.log("Product , removing:", product);
+//     removeCart(product.id);
+//   } else {
+//     console.log(" does not same Product, adding:", product);
+//     addCart(product);
+//   }
+// };
 
 const handleAddCart  = (product) => {
     if (!user) {
@@ -206,7 +206,7 @@ const handleAddCart  = (product) => {
           {listtop10.map((product) => (
             <div className="card-review" key={product.id}>
               <button className="cart-card-review" onClick={() => {
-                    toggleCart(product);
+                    // toggleCart(product);
                     handleAddCart(product);
                   }}>
                 <BsCart className="cart-logo-review" />
@@ -222,7 +222,7 @@ const handleAddCart  = (product) => {
                 {product.price} <span>EGP</span>
               </h6>
               <button
-                onClick={() => navigaterev("/momenpage")}
+                onClick={() => navigaterev("/details-page")}
                 className="btn-review"
               >
                 See Details
@@ -265,7 +265,7 @@ const handleAddCart  = (product) => {
                   </h5>
                 </div>
                 <div className="mb-4 d-flex justify-content-around wsbtn">
-                  <button className="btn btn-dark">View Details</button>
+                  <button className="btn btn-dark" onClick={() => navigaterev("/details-page")}>View Details</button>
 
                   <button className="cart-card" onClick={() => {
                     // toggleCart(product);

@@ -3,7 +3,7 @@ import "./App.css";
 import CustomNavbar from "./components/customNavbar";
 import Footer from "./components/footer";
 import MainContent from "./components/mainContent";
-import MomenPage from "./components/MomenPage";
+import DetailsPage from "./components/DetailsPage";
 import CreateAccount from "./pages/CreateAcountPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
@@ -26,7 +26,7 @@ function App() {
               <Route path="/" element={<MainContent />} />
               <Route path="/carts" element={<CartPage />} />
               <Route path="/products/:gender?" element={<ProductsPage />} />
-              <Route path="/momenpage" element={<MomenPage />} />
+              <Route path="/details-page" element={<DetailsPage />} />
             </Routes>
             <Footer />
           </CartProvider>

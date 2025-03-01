@@ -9,6 +9,22 @@ function CartPage() {
   const { user } = useUser();
   const { carts, removeCart } = useCart();
   const [cartsList, setCartsList] = useState([]);
+  const [ count, setCount] = useState({})
+
+
+  const increaseCount = (productId) => {
+    setCount((prevCount) => ({
+      ...prevCount,
+      [productId]: (prevCount[productId] || 1) + 1,
+    }));
+  };
+
+  const decreaseCount = (productId) => {
+    setCount((prevCount) => ({
+      ...prevCount,
+      [productId]: prevCount[productId] > 1 ? prevCount[productId] - 1 : 1,
+    }));
+  };
 
   useEffect(() => {
     if (user) {
@@ -43,7 +59,7 @@ function CartPage() {
                   id="img-favo"
                 />
               </div>
-              <div className="col-md-5 ">
+              <div className="col-md-5 favo-content">
                 <h2 className="mt-1 ">{product.title}</h2>
                 <p className="mt-2" id="favo-para">
                   {product.description}
@@ -54,6 +70,21 @@ function CartPage() {
                     <h6 className="star-logo">
                       <span id="rate">{product.price} <span>EGP</span></span>
                     </h6>
+                  </div>
+
+                  <div className="quantity">
+                    <button className="plus" onClick={() => increaseCount(product.id)}>
+                        +
+                    </button>
+
+                    <span>
+                    {count?.[product.id] || 1}
+                    </span>
+
+
+                    <button className="minus" onClick={() => decreaseCount(product.id)}>
+                        -
+                    </button>
                   </div>
 
                   <div>
