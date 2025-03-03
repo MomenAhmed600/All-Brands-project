@@ -8,6 +8,7 @@ import { BsCart, BsFillPersonFill, BsSearch } from "react-icons/bs";
 import { useUser } from "../context/UserContext";
 import { useCart } from "../context/CartContext";
 import { useEffect, useState } from "react";
+import { NavDropdown } from "react-bootstrap";
 
 function CustomNavbar() {
   const { user, setUser } = useUser();
@@ -66,6 +67,7 @@ useEffect(() => {
 
           {user ? (
             <>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
               <Nav.Link as={Link} to={`/profile/${user.id}`}>
                 <img
                   src={user.profileImage}
@@ -81,6 +83,7 @@ useEffect(() => {
                 <span>{user.firstName}</span>
               </Nav.Link>
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            </NavDropdown>
             </>
           ) : (
             <Nav.Link as={Link} to="login">

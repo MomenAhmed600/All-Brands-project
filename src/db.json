@@ -691,24 +691,6 @@
       "description": "Fluffy pancakes made with ripe bananas, perfect for a sweet morning treat.",
       "image": "https://images.mrcook.app/recipe-image/019257bf-1143-7438-97e9-9ae815d1363d",
       "rating": 0
-    },
-    {
-      "id": "64f2",
-      "userId": "f5c1",
-      "productId": "1a1b1c",
-      "title": "Leather Jacket",
-      "description": "Urban Outfitters",
-      "image": "https://leatherskinshop.com/cdn/shop/articles/how-should-a-leather-jacket-fit-mens_4ab0478c-51be-483e-ae03-d2b9150c14a7.png?v=1719189267",
-      "price": "2800"
-    },
-    {
-      "id": "efdd",
-      "userId": "f5c1",
-      "productId": "2b2c2d",
-      "title": "Floral Dress",
-      "description": "Forever 21",
-      "image": "https://eg.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/26/427904/1.jpg?5389",
-      "price": "900"
     }
   ]
 }

@@ -531,7 +531,7 @@ border-radius: 10px
 }
 
 
-/* <----------------------fevorites-page-------------------> */
+/* <----------------------cart-page-------------------> */
 
 .review-p-fevo {
   margin-top: 4rem;
@@ -643,6 +643,30 @@ border-radius: 10px
   background-color: #212121;
   color: #fff;
   transition: .5s ease;
+}
+
+.checkout h1 {
+  color: #5d8;
+}
+
+.content-1 {
+  display: flex;
+}
+
+.con-11 {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+}
+
+.content-2 {
+  display: flex;
+}
+
+.con-22 {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
 }
 
 /* <----------------------profile-page-------------------> */

@@ -17,6 +17,10 @@ function ProductsPage() {
   const { carts, addCart, removeCart } = useCart()
   const { user } = useUser();
 
+
+  
+
+
   useEffect(() => {
     if (location.pathname === "/products") {
       // <------------product-video-------------------->
