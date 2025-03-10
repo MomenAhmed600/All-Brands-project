@@ -12,8 +12,8 @@ import { NavDropdown } from "react-bootstrap";
 
 function CustomNavbar() {
   const { user, setUser } = useUser();
-  const { carts } = useCart();
-  const [cartCount, setCartCount] = useState(carts.length);
+  const { carts, cartItemCount } = useCart();
+  const [cartCount, setCartCount] = useState(0);
 
 //   useEffect(() => {
 //     setCartCount(carts.length);
@@ -21,20 +21,24 @@ function CustomNavbar() {
 // }, [carts]);
 
 
-useEffect(() => {
-  const fetchCarts = async () => {
-      try {
-          const response = await fetch("http://localhost:8000/carts");
-          const data = await response.json();
-          setCartCount(data.length > 0 ? data : []); 
-          console.log("🔄 Navbar updated:", carts.length);
-      } catch (error) {
-          console.error("Error fetching:", error);
-      }
-  };
-  fetchCarts();
-}, []);
+// useEffect(() => {
+//   const fetchCarts = async () => {
+//       try {
+//           const response = await fetch("http://localhost:8000/carts");
+//           const data = await response.json();
+//           setCartCount(data.length > 0 ? data : []); 
+//           console.log("🔄 Navbar updated:", carts.length);
+//       } catch (error) {
+//           console.error("Error fetching:", error);
+//       }
+//   };
+//   fetchCarts();
+// }, []);
 
+  useEffect(() => {
+    const c = Object.keys(carts).map(id => carts[id].count).reduce((acc, curr) => acc + curr, 0);
+    setCartCount(c)
+  }, [carts])
 
   const navigate = useNavigate();
 
@@ -42,6 +46,7 @@ useEffect(() => {
     setUser(null);
     navigate("/");
   };
+
   return (
     <Navbar bg="light">
       <Container>
@@ -93,12 +98,12 @@ useEffect(() => {
 
           <Nav.Link as={Link} to="/carts" className="position-relative cart-log">
             <BsCart />
-            {carts.length > 0 && (
+            {cartCount > 0 && (
               <span
                 className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger count-log"
                 style={{ fontSize: "12px" }}
               >
-                {carts.length}
+                {cartCount}
               </span>
             )}
           </Nav.Link>

@@ -683,14 +683,6 @@
     }
   ],
   "carts": [
-    {
-      "id": "6380",
-      "userId": "b03d",
-      "recipeId": "54w4ddsd",
-      "title": "Banana Pancakes",
-      "description": "Fluffy pancakes made with ripe bananas, perfect for a sweet morning treat.",
-      "image": "https://images.mrcook.app/recipe-image/019257bf-1143-7438-97e9-9ae815d1363d",
-      "rating": 0
-    }
+   
   ]
 }

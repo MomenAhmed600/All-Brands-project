@@ -139,29 +139,30 @@ function ProductsPage() {
 // };
 
 const handleAddCart  = (product) => {
-    if (!user) {
-        alert("Please log in to show your carts.");
-        return;
-    }
+    // if (!user) {
+    //     alert("Please log in to show your carts.");
+    //     return;
+    // }
 
-    fetch('http://localhost:8000/carts', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            userId: user.id,
-            productId: product.id,
-            title: product.title,
-            description: product.description,
-            image: product.image,
-            price: product.price,
-        }),
-    })
-        .then(res => res.json())
-        .then(data => {
-          addCart(data);
-        })
+    // fetch('http://localhost:8000/carts', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         userId: user.id,
+    //         productId: product.id,
+    //         title: product.title,
+    //         description: product.description,
+    //         image: product.image,
+    //         price: product.price,
+    //     }),
+    // })
+    //     .then(res => res.json())
+    //     .then(data => {
+          
+    //     })
+        addCart(product);
 };
 
  

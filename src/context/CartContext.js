@@ -3,10 +3,20 @@
     const CartContext = createContext()
 
     export const CartProvider = ({ children }) => {
-        const [carts, setCarts] = useState([])
+        const [carts, setCarts] = useState({})
+        
 
         const addCart = (product) => {
-            setCarts((prevCarts) => [...prevCarts, product])
+            setCarts((prevCarts) => {
+                const count = product.id in prevCarts ? prevCarts[product.id].count + 1 : 1;
+                return {
+                    ...prevCarts,
+                    [product.id]: {
+                        product,
+                        count,
+                    }
+                }
+            })
         };
 
         const removeCart = (productId) => {

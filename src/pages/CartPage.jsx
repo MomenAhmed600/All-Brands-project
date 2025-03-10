@@ -10,7 +10,12 @@ function CartPage() {
   const { carts, removeCart } = useCart();
   const [cartsList, setCartsList] = useState([]);
   const [count, setCount] = useState({});
+  const [cartCount, setCartCount] = useState(0);
 
+  useEffect(() => {
+    const c = Object.keys(carts).map(id => carts[id].count).reduce((acc, curr) => acc + curr, 0);
+    setCartCount(c)
+  }, [carts])
 
 
    const increaseCount = (productId) => {
@@ -47,13 +52,14 @@ function CartPage() {
       })
       .catch((err) => console.log(err));
   };
+  console.log('carts', carts);
   return (
     <>
       <Container>
-        {cartsList.map((product) => (
+        {Object.keys(carts).map(id => carts[id]).map(({ product, count }) => (
           <>
             <div className="review-p-fevo" key={product.id}>
-              <div className="row" id="bg-prof-img" key={product.id}>
+              <div className="row" id="bg-prof-img">
                 <div className="col-md-2">
                   <img
                     src={product.image}
@@ -85,7 +91,7 @@ function CartPage() {
                         +
                       </button>
 
-                      <span>{count?.[product.id] || 1}</span>
+                      <span>{count}</span>
 
                       <button
                         className="minus"
@@ -126,7 +132,7 @@ function CartPage() {
               </div>
               <div className="con-11">
                 <h5>
-                  {Object.values(count).reduce((acc, curr) => acc + curr, 0)}
+                {cartCount}
                 </h5>
               </div>
             </div>
@@ -138,7 +144,7 @@ function CartPage() {
               <div className="con-22">
                 <h5>
                   {cartsList.reduce((acc, product) =>
-                      acc + (count[product.id] || 1) * product.price,
+                      acc + (cartCount[product.id] || 1) * product.price,
                     0
                   )}{" "}
                   <span>EGP</span>
