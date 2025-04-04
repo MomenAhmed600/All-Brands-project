@@ -11,12 +11,14 @@ import { UserProvider } from "./context/UserContext";
 import ProductsPage from "./pages/ProductsPage";
 import ProfilePage from "./pages/ProfilePage";
 import { CartProvider } from "./context/CartContext";
+import { SearchProvider } from "./context/SearchContext";
 
 function App() {
   return (
     <>
       <UserProvider>
         <Router>
+            <SearchProvider>
           <CartProvider>
             <CustomNavbar />
             <Routes>
@@ -26,10 +28,11 @@ function App() {
               <Route path="/" element={<MainContent />} />
               <Route path="/carts" element={<CartPage />} />
               <Route path="/products/:gender?" element={<ProductsPage />} />
-              <Route path="/details-page" element={<DetailsPage />} />
+              <Route path="/details-page/:id" element={<DetailsPage />} />
             </Routes>
             <Footer />
           </CartProvider>
+            </SearchProvider>
         </Router>
       </UserProvider>
     </>

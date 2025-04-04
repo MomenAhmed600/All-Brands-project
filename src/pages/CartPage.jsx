@@ -1,37 +1,37 @@
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { FaStar } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import { useUser } from "../context/UserContext";
-import { createContext, useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
+import { useUser } from "../context/UserContext";
 
 function CartPage() {
   const { user } = useUser();
-  const { carts, removeCart } = useCart();
+  const { carts, removeCart, increaseCartCount, decreaseCartCount } = useCart();
   const [cartsList, setCartsList] = useState([]);
-  const [count, setCount] = useState({});
+  // const [count, setCount] = useState({});
   const [cartCount, setCartCount] = useState(0);
+  const [price, setPrice] = useState(0) 
 
   useEffect(() => {
-    const c = Object.keys(carts).map(id => carts[id].count).reduce((acc, curr) => acc + curr, 0);
+    const c = Object.keys(carts)
+    .map(id => carts[id].count)
+    .reduce((acc, curr) => acc + curr, 0);
+    
     setCartCount(c)
   }, [carts])
 
+  useEffect(() =>{
+    const prc = Object.keys(carts)
+    .map(id =>({
+      price: carts[id].product.price,
+      count: carts[id].count
+    }))
+    .reduce((acc, curr) => acc + (curr.price * curr.count), 0);
 
-   const increaseCount = (productId) => {
-    setCount((prevCount) => ({
-      ...prevCount,
+    setPrice(prc)
+  }, [carts])
 
-      [productId]: (prevCount[productId] || 1) + 1,
-    }));
-  };
 
-  const decreaseCount = (productId) => {
-    setCount((prevCount) => ({
-      ...prevCount,
-      [productId]: prevCount[productId] > 1 ? prevCount[productId] - 1 : 1,
-    }));
-  };
 
   useEffect(() => {
     if (user) {
@@ -41,18 +41,7 @@ function CartPage() {
     }
   }, [user]);
 
-  const handelRemoveCart = (productId) => {
-    fetch(`http://localhost:8000/carts/${productId}`, {
-      method: "DELETE",
-    })
-      .then(() => {
-        console.log("Product deleted from server:", productId);
-        setCartsList(cartsList.filter((car) => car.id !== productId));
-        removeCart(productId);
-      })
-      .catch((err) => console.log(err));
-  };
-  console.log('carts', carts);
+ 
   return (
     <>
       <Container>
@@ -60,7 +49,7 @@ function CartPage() {
           <>
             <div className="review-p-fevo" key={product.id}>
               <div className="row" id="bg-prof-img">
-                <div className="col-md-2">
+                <div className="col-md-2 " id="img-fv">
                   <img
                     src={product.image}
                     alt=""
@@ -83,19 +72,20 @@ function CartPage() {
                       </h6>
                     </div>
 
-                    <div className="quantity">
+                    <div className="quananddel">
+                                          <div className="quantity">
                       <button
                         className="plus"
-                        onClick={() => increaseCount(product.id)}
+                        onClick={() => increaseCartCount(product.id)}
                       >
                         +
                       </button>
 
-                      <span>{count}</span>
+                      <span>{carts[product.id]?.count || 1}</span>
 
                       <button
                         className="minus"
-                        onClick={() => decreaseCount(product.id)}
+                        onClick={() => decreaseCartCount(product.id)}
                       >
                         -
                       </button>
@@ -104,13 +94,14 @@ function CartPage() {
                     <div>
                       <a
                         id="delete-logo"
-                        onClick={() => handelRemoveCart(product.id)}
+                        onClick={() => removeCart (product.id)}
                         href="#as"
                       >
                         <i>
                           <MdDeleteForever />
                         </i>{" "}
                       </a>
+                    </div>
                     </div>
                   </div>
                   <button type="button" id="btn-fevo">
@@ -143,10 +134,7 @@ function CartPage() {
               </div>
               <div className="con-22">
                 <h5>
-                  {cartsList.reduce((acc, product) =>
-                      acc + (cartCount[product.id] || 1) * product.price,
-                    0
-                  )}{" "}
+                  {price}
                   <span>EGP</span>
                 </h5>
               </div>

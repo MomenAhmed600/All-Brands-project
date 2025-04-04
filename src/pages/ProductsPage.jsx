@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { BsCart } from "react-icons/bs";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { useUser } from "../context/UserContext"; 
+import { useSearch } from "../context/SearchContext";
 
 
 function ProductsPage() {
@@ -14,8 +14,8 @@ function ProductsPage() {
   const [listvideo, setListvideo] = useState([]);
   const { gender } = useParams();
   const location = useLocation();
-  const { carts, addCart, removeCart } = useCart()
-  const { user } = useUser();
+  const { addCart } = useCart()
+  const { search } = useSearch()
 
 
   
@@ -119,54 +119,14 @@ function ProductsPage() {
   };
 
 
-//   const toggleCart = (product) => {
-//     if (carts.some(car => car.id === product.id)) {
-//       removeCart(product.id)
-//     } else {
-//       addCart(product)
-//     }
-// };
-
-// const toggleCart = (product) => {
-//   console.log("Current carts:", carts);
-//   if (carts.some(car => car.id === product.id)) {
-//     console.log("Product , removing:", product);
-//     removeCart(product.id);
-//   } else {
-//     console.log(" does not same Product, adding:", product);
-//     addCart(product);
-//   }
-// };
-
 const handleAddCart  = (product) => {
-    // if (!user) {
-    //     alert("Please log in to show your carts.");
-    //     return;
-    // }
-
-    // fetch('http://localhost:8000/carts', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //         userId: user.id,
-    //         productId: product.id,
-    //         title: product.title,
-    //         description: product.description,
-    //         image: product.image,
-    //         price: product.price,
-    //     }),
-    // })
-    //     .then(res => res.json())
-    //     .then(data => {
-          
-    //     })
         addCart(product);
 };
 
- 
-  const navigaterev = useNavigate();
+
+  const listpro = list.filter(product => 
+    product.title.toLowerCase().includes(search.toLowerCase())
+);
 
   return (
     <>
@@ -181,12 +141,12 @@ const handleAddCart  = (product) => {
         </div>
       ))}
       <div className="pearnt-product">
-        <button className="link">
+        <button className="link" >
           <Link className="chi" to="/products">
             All Products
           </Link>
         </button>
-        <button className="link">
+        <button className="link" >
           <Link className="chi" to="/products/woman">
             Women
           </Link>
@@ -211,7 +171,6 @@ const handleAddCart  = (product) => {
           {listtop10.map((product) => (
             <div className="card-review" key={product.id}>
               <button className="cart-card-review" onClick={() => {
-                    // toggleCart(product);
                     handleAddCart(product);
                   }}>
                 <BsCart className="cart-logo-review" />
@@ -226,12 +185,14 @@ const handleAddCart  = (product) => {
               <h6>
                 {product.price} <span>EGP</span>
               </h6>
+              <Link to={`/details-page/${product.id}`}>
               <button
-                onClick={() => navigaterev("/details-page")}
+                // onClick={() => navigaterev("/details-page")}
                 className="btn-review"
               >
                 See Details
               </button>
+              </Link>
             </div>
           ))}
         </Carousel>
@@ -254,7 +215,7 @@ const handleAddCart  = (product) => {
 
       <div className="container py-5">
         <div className="row row-cols-1 row-cols-md-3 g-4 py-2">
-          {list.map((product) => (
+          {listpro.map((product) => (
             <div className="col" key={product.id}>
               <div className="card pdcard">
                 <img
@@ -270,10 +231,11 @@ const handleAddCart  = (product) => {
                   </h5>
                 </div>
                 <div className="mb-4 d-flex justify-content-around wsbtn">
-                  <button className="btn btn-dark" onClick={() => navigaterev("/details-page")}>View Details</button>
-
+                <Link to={`/details-page/${product.id}`}>
+                  <button className="btn btn-dark" >
+                    View Details</button>
+                    </Link>
                   <button className="cart-card" onClick={() => {
-                    // toggleCart(product);
                     handleAddCart(product);
                   }}>
                     <BsCart className="cart-logo" />

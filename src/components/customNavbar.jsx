@@ -8,32 +8,16 @@ import { BsCart, BsFillPersonFill, BsSearch } from "react-icons/bs";
 import { useUser } from "../context/UserContext";
 import { useCart } from "../context/CartContext";
 import { useEffect, useState } from "react";
-import { NavDropdown } from "react-bootstrap";
+import { Modal, NavDropdown } from "react-bootstrap";
+import { useSearch } from '../context/SearchContext';
 
 function CustomNavbar() {
   const { user, setUser } = useUser();
   const { carts, cartItemCount } = useCart();
   const [cartCount, setCartCount] = useState(0);
+  const { search, setSearch } = useSearch();
+  const [showSearch, setShowSearch] = useState(false);
 
-//   useEffect(() => {
-//     setCartCount(carts.length);
-//     console.log("🔄 Navbar updated! Cart count:", carts.length);
-// }, [carts]);
-
-
-// useEffect(() => {
-//   const fetchCarts = async () => {
-//       try {
-//           const response = await fetch("http://localhost:8000/carts");
-//           const data = await response.json();
-//           setCartCount(data.length > 0 ? data : []); 
-//           console.log("🔄 Navbar updated:", carts.length);
-//       } catch (error) {
-//           console.error("Error fetching:", error);
-//       }
-//   };
-//   fetchCarts();
-// }, []);
 
   useEffect(() => {
     const c = Object.keys(carts).map(id => carts[id].count).reduce((acc, curr) => acc + curr, 0);
@@ -46,9 +30,12 @@ function CustomNavbar() {
     setUser(null);
     navigate("/");
   };
+  const handleSearchClose = () => setShowSearch(false);
+  const handleSearchShow = () => setShowSearch(true);
 
   return (
-    <Navbar bg="light">
+    <>
+    <Navbar bg="light" id="navooo">
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <div className="img-logo">
@@ -66,7 +53,7 @@ function CustomNavbar() {
           </Nav.Link>
         </Nav>
         <Nav className="me-2">
-          <Nav.Link href="#login">
+          <Nav.Link href="#login" onClick={handleSearchShow}>
             <BsSearch />
           </Nav.Link>
 
@@ -110,6 +97,21 @@ function CustomNavbar() {
         </Nav>
       </Container>
     </Navbar>
+          <Modal show={showSearch} onHide={handleSearchClose}>
+          <Modal.Header closeButton>
+              <Modal.Title>Search Recipe</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+              <input
+                  type="text"
+                  placeholder="Search recipe"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="form-control"
+              />
+          </Modal.Body>
+      </Modal>
+      </>
   );
 }
 

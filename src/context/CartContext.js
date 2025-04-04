@@ -19,13 +19,39 @@
             })
         };
 
+
         const removeCart = (productId) => {
-            setCarts((prevCarts) => prevCarts.filter(product => product.id !== productId))
-        }
+            setCarts((prevCarts) => {
+                const updatedCarts = { ...prevCarts };
+                delete updatedCarts[productId];
+                return updatedCarts;
+            });
+        };
+
+
+        const increaseCartCount = (productId) => {
+            setCarts((prevCarts) => ({
+                ...prevCarts,
+                [productId]: {
+                    ...prevCarts[productId],
+                    count: prevCarts[productId].count + 1,
+                },
+            }));
+        };
+        
+        const decreaseCartCount = (productId) => {
+            setCarts((prevCarts) => ({
+                ...prevCarts,
+                [productId]: {
+                    ...prevCarts[productId],
+                    count: prevCarts[productId].count > 1 ? prevCarts[productId].count - 1 : 1,
+                },
+            }));
+        };
 
 
         return (
-            <CartContext.Provider value={{ carts, addCart, removeCart }}>
+            <CartContext.Provider value={{ carts, addCart, removeCart, increaseCartCount, decreaseCartCount }}>
                 {children}
             </CartContext.Provider>
         )
