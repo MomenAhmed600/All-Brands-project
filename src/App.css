@@ -330,8 +330,46 @@ hr {
   color: red;
 }
 
+.content-pro {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: 0.6s;
+}
 
+.content-pro:hover {
+  opacity: 1;
+}
 
+.content-pro h1{
+  color: #fff;
+  font-size: 130px;
+}
+.content-pro h1 span {
+  color: red;
+}
+
+.btn-sreach-di {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-sreach {
+  margin-top: 10px;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #48cb57;
+}
 
 
 
@@ -876,6 +914,10 @@ border-radius: 10px
     font-size: 80px;
   }
 
+  .content-pro h1{
+    font-size: 80px;
+  }
+
   .card-review:hover{
     border: none;
     }
@@ -1071,6 +1113,11 @@ border-radius: 10px
 
 @media screen and (max-width: 600px) {
   .content h1{
+    font-size:25px;
+  }
+
+  
+  .content-pro h1{
     font-size:25px;
   }
   .box-container {

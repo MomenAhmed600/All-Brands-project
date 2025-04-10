@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BsCart } from "react-icons/bs";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useSearch } from "../context/SearchContext";
 
@@ -13,7 +13,6 @@ function ProductsPage() {
   const [listfrontphoto, setListfrontphoto] = useState([]);
   const [listvideo, setListvideo] = useState([]);
   const { gender } = useParams();
-  const location = useLocation();
   const { addCart } = useCart()
   const { search } = useSearch()
 
@@ -22,7 +21,7 @@ function ProductsPage() {
 
 
   useEffect(() => {
-    if (location.pathname === "/products") {
+    if (!gender) {
       // <------------product-video-------------------->
       fetch("http://localhost:8000/allproduct-video")
         .then((response) => {
@@ -141,26 +140,26 @@ const handleAddCart  = (product) => {
         </div>
       ))}
       <div className="pearnt-product">
-        <button className="link" >
           <Link className="chi" to="/products">
-            All Products
-          </Link>
-        </button>
         <button className="link" >
+            All Products
+        </button>
+          </Link>
           <Link className="chi" to="/products/woman">
+        <button className="link" >
             Women
-          </Link>
         </button>
-        <button className="link">
+          </Link>
           <Link className="chi" to="/products/man">
-            Men
-          </Link>
-        </button>
         <button className="link">
-          <Link className="chi" to="/products/kids">
-            kids
-          </Link>
+            Men
         </button>
+          </Link>
+          <Link className="chi" to="/products/kids">
+        <button className="link">
+            kids
+        </button>
+          </Link>
       </div>
 
       <div className="pe">
@@ -201,7 +200,7 @@ const handleAddCart  = (product) => {
       {listfrontphoto.map((product) => (
         <div className="img-cover" key={product.id}>
           <img src={product.image} alt="" />
-          <div className="content">
+          <div className="content-pro">
             <h1>
               Sale<span>30%</span>For Collection
             </h1>
@@ -235,10 +234,10 @@ const handleAddCart  = (product) => {
                   <button className="btn btn-dark" >
                     View Details</button>
                     </Link>
-                  <button className="cart-card" onClick={() => {
+                  <button className="btn btn-success" onClick={() => {
                     handleAddCart(product);
                   }}>
-                    <BsCart className="cart-logo" />
+                    Add Cart
                   </button>
                 </div>
               </div>
