@@ -2,13 +2,9 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { MdDeleteForever } from "react-icons/md";
 import { useCart } from "../context/CartContext";
-import { useUser } from "../context/UserContext";
 
 function CartPage() {
-  const { user } = useUser();
   const { carts, removeCart, increaseCartCount, decreaseCartCount } = useCart();
-  const [cartsList, setCartsList] = useState([]);
-  // const [count, setCount] = useState({});
   const [cartCount, setCartCount] = useState(0);
   const [price, setPrice] = useState(0) 
 
@@ -33,13 +29,13 @@ function CartPage() {
 
 
 
-  useEffect(() => {
-    if (user) {
-      fetch(`http://localhost:8000/carts?userId=${user.id}`)
-        .then((res) => res.json())
-        .then((data) => setCartsList(data));
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     fetch(`http://localhost:8000/carts?userId=${user.id}`)
+  //       .then((res) => res.json())
+  //       .then((data) => setCartsList(data));
+  //   }
+  // }, [user]);
 
  
   return (
