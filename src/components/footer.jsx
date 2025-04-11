@@ -10,7 +10,7 @@ const Footer = () => {
                     <div className="row">
                         <div className="col-md-6 col-lg-5 col-12 ft-1">
                             <h3><span>All</span> Brands </h3>
-                            <p>Be the first to know about our newest arrivals, special offers and store events near you.</p>
+                            <p>Be the first to discover limited stock items and special offers.</p>
                         </div>
                         <div className="col-md-6 col-lg-3 col-12 ft-2">
                             
